@@ -33,6 +33,8 @@ class meter:
 		#print 'diskDelta:' + str(diskDelta)
 		#print 'maxDiskDelta:' + str(self.maxDiskDelta)
 		self.maxDiskDelta = max(diskDelta, self.maxDiskDelta)
+		self.maxDiskDelta -= self.maxDiskDelta/60
+		self.maxDiskDelta = max(0, self.maxDiskDelta)
 		return self.trim((int((float(diskDelta)/float(self.maxDiskDelta))*255)))
 		
 	def getMem(self):
