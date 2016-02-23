@@ -1,0 +1,61 @@
+#!/usr/bin/python2.7
+import psutil, serial, time
+
+
+
+class meter:
+	'''
+		@todo: add a frames per second metric
+	'''
+
+	def __init__(self,interval):
+		print "initializing"
+		self.ser = serial.Serial('/dev/ttyACM0')
+		self.interval = interval
+		self.maxDiskDelta = 1.0
+		self.lastDisk = psutil.disk_io_counters().write_count + psutil.disk_io_counters().read_count
+		
+
+	def trim(self, x):
+		return min(255,max(0,x))		
+		
+	def getCpu(self):
+		loads = [(i/100.) for i in psutil.cpu_percent(1,True)]
+		usage = (sum(loads)/len(loads) + max(loads))/2 # adjusted usage = avg + max / 2
+                return self.trim(int((usage)*255))
+
+	def getDisk(self):
+		writes = psutil.disk_io_counters().write_count
+		reads = psutil.disk_io_counters().read_count
+		currentDisk = writes + reads
+		diskDelta = currentDisk - self.lastDisk
+		self.lastDisk = currentDisk
+		#print 'diskDelta:' + str(diskDelta)
+		#print 'maxDiskDelta:' + str(self.maxDiskDelta)
+		self.maxDiskDelta = max(diskDelta, self.maxDiskDelta)
+		return self.trim((int((float(diskDelta)/float(self.maxDiskDelta))*255)))
+		
+	def getMem(self):
+		# total,used,free,percentusage = psutil.phymem_usage()
+		total, available, percentusage, used, free, active, inactive, buffers, cached = psutil.virtual_memory()
+		return self.trim(int((percentusage/100.0)*255))
+	
+	def run(self):
+		while(True):
+
+			cpu = self.getCpu()
+			mem = self.getMem()
+			disk = self.getDisk()
+			time.sleep(self.interval)
+			print 'serial command = ' + str(cpu) + ' ' + str(disk) + ' ' + str(mem)
+			self.ser.write(chr(cpu))
+			self.ser.write(chr(disk))			
+			self.ser.write(chr(mem))
+			
+			
+			
+
+
+if __name__ == "__main__":
+	thismeter = meter(0.5)
+	thismeter.run()
