@@ -1,4 +1,4 @@
-#!/usr/bin/python2.7
+/usr/bin/python2.7
 import psutil, serial, time
 
 
@@ -20,7 +20,8 @@ class meter:
 		return min(255,max(0,x))		
 		
 	def getCpu(self):
-		loads = [(i/100.) for i in psutil.cpu_percent(1,True)]
+		interval = 1 # polling seconds
+		loads = [(i/100.) for i in psutil.cpu_percent(interval, True)]
 		usage = (sum(loads)/len(loads) + max(loads))/2 # adjusted usage = avg + max / 2
                 return self.trim(int((usage)*255))
 
