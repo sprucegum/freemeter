@@ -1,10 +1,11 @@
-/usr/bin/python2.7
+#!/usr/bin/python2.7
 import psutil, serial, time
 
 
 
 class meter:
 	'''
+		@todo: autodetect the serial port
 		@todo: add a frames per second metric
 	'''
 
