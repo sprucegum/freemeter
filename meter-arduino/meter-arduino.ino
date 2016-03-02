@@ -1,15 +1,30 @@
+/*     
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 /*
   Simple 3-Gauge Meter
+  Author: Jade Lacosse
  */
 #define METERS 3
 int meterPins[3] =  {3,10,11};
 int targetValues[METERS];
 int currentValues[METERS];
-unsigned long nextTick[METERS];
 int meterVelocity[METERS];
 int charsReceived = 0;
 
-
+unsigned long nextTick[METERS];
 unsigned long messageDelay = 1000000; // 1 second to start
 unsigned long currentTime = micros();
 unsigned long oldTime = currentTime - messageDelay;
@@ -70,6 +85,7 @@ void updateScheduleForMeter(int meter) {
     meterVelocity[meter] = 0;
   }
 }
+
 /*
   SerialEvent occurs whenever a new data comes in the
  hardware serial RX.  This routine is run between each
