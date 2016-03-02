@@ -18,6 +18,8 @@
   Author: Jade Lacosse
  */
 #define METERS 3
+#define MESSAGE_DELAY 1000000
+#define SLEEP_DELAY   5000000
 int meterPins[3] =  {3,10,11};
 int targetValues[METERS];
 int currentValues[METERS];
@@ -25,9 +27,9 @@ int meterVelocity[METERS];
 int charsReceived = 0;
 
 unsigned long nextTick[METERS];
-unsigned long messageDelay = 1000000; // 1 second to start
+unsigned long messageDelay = MESSAGE_DELAY; // 1 second to start
 unsigned long currentTime = micros();
-unsigned long oldTime = currentTime - messageDelay;
+unsigned long oldTime = currentTime;
 unsigned long targetTime = currentTime + messageDelay; // when we think we'll get the next serial update
 
 bool dataReady = false;
@@ -48,14 +50,26 @@ void setup() {
  * @todo: switch from polling to an interrupt
  */
 void loop() {
+  currentTime = micros();
   if (dataReady) {
-    currentTime = micros();
     for (int meter = 0;meter < METERS; meter++) {
       if (currentTime >= nextTick[meter]) {
         updatePin(meter);
       }
     }
   }
+  if ((currentTime - oldTime) > SLEEP_DELAY) {
+    sleep();
+  }
+}
+
+void sleep() {
+  for (int meter=0; meter < METERS; meter++) {
+    targetValues[meter] = 0;
+  }
+  charsReceived = 0;
+  targetTime = currentTime + MESSAGE_DELAY;
+  oldTime = currentTime;
 }
 
 /**
