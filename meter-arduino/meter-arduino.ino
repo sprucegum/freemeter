@@ -63,6 +63,9 @@ void loop() {
   }
 }
 
+/**
+ * Bring the gauges down to zero, prepare the meter for its next message.
+ */
 void sleep() {
   for (int meter=0; meter < METERS; meter++) {
     targetValues[meter] = 0;
