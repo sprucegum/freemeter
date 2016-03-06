@@ -23,7 +23,7 @@ class meter:
 		@todo: add a frames per second metric
 	'''
 
-	def __init__(self,interval):
+	def __init__(self, interval):
 		print "initializing"
 		self.ser = serial.Serial('/dev/ttyACM0')
 		self.interval = interval
@@ -35,8 +35,7 @@ class meter:
 		return min(255,max(0,x))		
 		
 	def getCpu(self):
-		interval = 1 # polling seconds
-		loads = [(i/100.) for i in psutil.cpu_percent(interval, True)]
+		loads = [(i/100.) for i in psutil.cpu_percent(self.interval, True)]
 		usage = (sum(loads)/len(loads) + max(loads))/2 # adjusted usage = avg + max / 2
                 return self.trim(int((usage)*255))
 
@@ -75,5 +74,5 @@ class meter:
 
 
 if __name__ == "__main__":
-	thismeter = meter(0.5)
+	thismeter = meter(0.05)
 	thismeter.run()

@@ -92,10 +92,10 @@ void updateScheduleForMeter(int meter) {
   int targetValue = targetValues[meter];
   int currentValue = currentValues[meter];
   int deltaValue = targetValue - currentValue;
-  unsigned long remainingTime = (targetTime - currentTime) + messageDelay/20; // currentTime global is updated in the loop.
+  unsigned long remainingTime = max((targetTime - currentTime) + messageDelay/20, 1000000); // currentTime global is updated in the loop.
   if (remainingTime > 0) {
     if (deltaValue) {
-      nextTick[meter] = remainingTime/abs(deltaValue) + currentTime;
+      nextTick[meter] = (remainingTime/abs(deltaValue)) + currentTime;
       meterVelocity[meter] = (deltaValue > 0) ? 1 : -1; 
     }
   } else {

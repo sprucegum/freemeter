@@ -259,7 +259,7 @@ ISO double-dash triple-dot __ __ . . . __ __ . .
  73
 10
  40
-39.0
+39.0000000000000071
  49
 12.0
  74
@@ -273,31 +273,31 @@ ISO double-dash triple-dot __ __ . . . __ __ . .
  74
 0
  49
--3.0
+-2.9500000000000002
  74
 0
  49
-0.0
+0.1
  74
 0
  49
--3.0
+-2.9000000000000004
  74
 0
  49
-0.0
+0.1
  74
 0
  49
--3.0
+-2.9000000000000004
  74
 0
  49
-0.0
+0.1
  74
 0
  49
--3.0
+-2.9500000000000002
  74
 0
   0
@@ -319,29 +319,29 @@ Divide ____ . . ____ . . ____ . . ____ . . ____
  73
 6
  40
-31.75
+31.7500000000000036
  49
 12.6999999999999993
  74
 0
  49
--6.3499999999999996
+-6.2999999999999998
  74
 0
  49
-0.0
+0.1
  74
 0
  49
--6.3499999999999996
+-6.25
  74
 0
  49
-0.0
+0.1
  74
 0
  49
--6.3499999999999996
+-6.2999999999999998
  74
 0
   0
@@ -369,15 +369,15 @@ ISO dash dot __ . __ . __ . __ . __ . __ . __ .
  74
 0
  49
--3.0
+-2.9500000000000002
  74
 0
  49
-0.0
+0.1
  74
 0
  49
--3.0
+-2.9500000000000002
  74
 0
   0
@@ -405,15 +405,15 @@ ISO long-dash dot ____ . ____ . ____ . ____ . _
  74
 0
  49
--3.0
+-2.9500000000000002
  74
 0
  49
-0.0
+0.1
  74
 0
  49
--3.0
+-2.9500000000000002
  74
 0
   0
@@ -485,15 +485,15 @@ ISO double-dash dot __ __ . __ __ . __ __ . __ _
  74
 0
  49
--3.0
+-2.9500000000000002
  74
 0
  49
-0.0
+0.1
  74
 0
  49
--3.0
+-2.9500000000000002
  74
 0
   0
@@ -543,7 +543,7 @@ Border (2x) ____  ____  .  ____  ____  .  ___
  73
 6
  40
-88.8999999999999915
+88.8999999999999773
  49
 25.3999999999999986
  74
@@ -557,15 +557,15 @@ Border (2x) ____  ____  .  ____  ____  .  ___
  74
 0
  49
--12.6999999999999993
+-12.6499999999999986
  74
 0
  49
-0.0
+0.1
  74
 0
  49
--12.6999999999999993
+-12.6499999999999986
  74
 0
   0
@@ -587,29 +587,29 @@ ISO long-dash double-dot ____ .. ____ .. ____ .
  73
 6
  40
-33.0
+33.0000000000000071
  49
 24.0
  74
 0
  49
--3.0
+-2.9500000000000002
  74
 0
  49
-0.0
+0.1
  74
 0
  49
--3.0
+-2.9000000000000004
  74
 0
  49
-0.0
+0.1
  74
 0
  49
--3.0
+-2.9500000000000002
  74
 0
   0
@@ -637,15 +637,15 @@ Dash dot (2x) ____  .  ____  .  ____  .  ___
  74
 0
  49
--12.6999999999999993
+-12.6499999999999986
  74
 0
  49
-0.0
+0.1
  74
 0
  49
--12.6999999999999993
+-12.6499999999999986
  74
 0
   0
@@ -731,7 +731,7 @@ Border (.5x) __.__.__.__.__.__.__.__.__.__.__.
  73
 6
  40
-22.2249999999999979
+22.2250000000000014
  49
 6.3499999999999996
  74
@@ -745,15 +745,15 @@ Border (.5x) __.__.__.__.__.__.__.__.__.__.__.
  74
 0
  49
--3.1749999999999998
+-3.125
  74
 0
  49
-0.0
+0.1
  74
 0
  49
--3.1749999999999998
+-3.125
  74
 0
   0
@@ -781,15 +781,15 @@ Dash dot (.5x) _._._._._._._._._._._._._._._.
  74
 0
  49
--3.1749999999999998
+-3.125
  74
 0
  49
-0.0
+0.1
  74
 0
  49
--3.1749999999999998
+-3.125
  74
 0
   0
@@ -817,23 +817,23 @@ ISO dash double-dot __ . . __ . . __ . . __ . .
  74
 0
  49
--3.0
+-2.9500000000000002
  74
 0
  49
-0.0
+0.1
  74
 0
  49
--3.0
+-2.9000000000000004
  74
 0
  49
-0.0
+0.1
  74
 0
  49
--3.0
+-2.9500000000000002
  74
 0
   0
@@ -857,11 +857,11 @@ ISO dot . . . . . . . . . . . . . . . . . . . .
  40
 3.0
  49
-0.0
+0.1
  74
 0
  49
--3.0
+-2.8999999999999999
  74
 0
   0
@@ -911,37 +911,37 @@ ISO long-dash triple-dot ____ ... ____ ... ____
  73
 8
  40
-36.0
+36.0000000000000071
  49
 24.0
  74
 0
  49
--3.0
+-2.9500000000000002
  74
 0
  49
-0.0
+0.1
  74
 0
  49
--3.0
+-2.9000000000000004
  74
 0
  49
-0.0
+0.1
  74
 0
  49
--3.0
+-2.9000000000000004
  74
 0
  49
-0.0
+0.1
  74
 0
  49
--3.0
+-2.9500000000000002
  74
 0
   0
@@ -1001,11 +1001,11 @@ Dot (2x) .  .  .  .  .  .  .  .  .  .  .  .  .  .
  40
 12.6999999999999993
  49
-0.0
+0.1
  74
 0
  49
--12.6999999999999993
+-12.5999999999999996
  74
 0
   0
@@ -1279,7 +1279,7 @@ ISO double-dash double-dot __ __ . . __ __ . . _
  73
 8
  40
-36.0
+36.0000000000000071
  49
 12.0
  74
@@ -1293,23 +1293,23 @@ ISO double-dash double-dot __ __ . . __ __ . . _
  74
 0
  49
--3.0
+-2.9500000000000002
  74
 0
  49
-0.0
+0.1
  74
 0
  49
--3.0
+-2.9000000000000004
  74
 0
  49
-0.0
+0.1
  74
 0
  49
--3.0
+-2.9500000000000002
  74
 0
   0
@@ -1333,11 +1333,11 @@ Dot (.5x) ........................................
  40
 3.1749999999999998
  49
-0.0
+0.1
  74
 0
  49
--3.1749999999999998
+-3.0749999999999997
  74
 0
   0
@@ -1387,37 +1387,37 @@ ISO dash triple-dot __ . . . __ . . . __ . . . _
  73
 8
  40
-24.0
+24.0000000000000036
  49
 12.0
  74
 0
  49
--3.0
+-2.9500000000000002
  74
 0
  49
-0.0
+0.1
  74
 0
  49
--3.0
+-2.9000000000000004
  74
 0
  49
-0.0
+0.1
  74
 0
  49
--3.0
+-2.9000000000000004
  74
 0
  49
-0.0
+0.1
  74
 0
  49
--3.0
+-2.9500000000000002
  74
 0
   0
@@ -1529,23 +1529,23 @@ Divide (2x) ________  .  .  ________  .  .  _
  74
 0
  49
--12.6999999999999993
+-12.6499999999999986
  74
 0
  49
-0.0
+0.1
  74
 0
  49
--12.6999999999999993
+-12.5999999999999979
  74
 0
  49
-0.0
+0.1
  74
 0
  49
--12.6999999999999993
+-12.6499999999999986
  74
 0
   0
@@ -1581,15 +1581,15 @@ Border __ __ . __ __ . __ __ . __ __ . __ __ .
  74
 0
  49
--6.3499999999999996
+-6.2999999999999998
  74
 0
  49
-0.0
+0.1
  74
 0
  49
--6.3499999999999996
+-6.2999999999999998
  74
 0
   0
@@ -1611,29 +1611,29 @@ Divide (.5x) __..__..__..__..__..__..__..__.._
  73
 6
  40
-15.875
+15.8749999999999982
  49
 6.3499999999999996
  74
 0
  49
--3.1749999999999998
+-3.125
  74
 0
  49
-0.0
+0.1
  74
 0
  49
--3.1749999999999998
+-3.0750000000000002
  74
 0
  49
-0.0
+0.1
  74
 0
  49
--3.1749999999999998
+-3.125
  74
 0
   0
@@ -1657,11 +1657,11 @@ Dot . . . . . . . . . . . . . . . . . . . . . . . .
  40
 6.3499999999999996
  49
-0.0
+0.1
  74
 0
  49
--6.3499999999999996
+-6.25
  74
 0
   0
@@ -1683,21 +1683,21 @@ Dash dot __ . __ . __ . __ . __ . __ . __ . __
  73
 4
  40
-25.3999999999999986
+25.4000000000000021
  49
 12.6999999999999993
  74
 0
  49
--6.3499999999999996
+-6.2999999999999998
  74
 0
  49
-0.0
+0.1
  74
 0
  49
--6.3499999999999996
+-6.2999999999999998
  74
 0
   0
@@ -1985,6 +1985,18 @@ AcDbBlockTableRecord
 340
 26
   0
+BLOCK_RECORD
+  5
+59
+100
+AcDbSymbolTableRecord
+100
+AcDbBlockTableRecord
+  2
+circular_gauge
+340
+0
+  0
 ENDTAB
   0
 ENDSEC
@@ -2099,71 +2111,29 @@ AcDbEntity
 100
 AcDbBlockEnd
   0
-ENDSEC
-  0
-SECTION
-  2
-ENTITIES
-  0
-XLINE
-  5
-59
-100
-AcDbEntity
-100
-AcDbLine
-  8
-0
- 62
-256
-370
--1
- 48
-1.0
-  6
-BYLAYER
- 10
-90.0
- 20
-0.0
- 30
-0.0
- 11
-1.0
- 21
-0.0
- 31
-0.0
-  0
-XLINE
+BLOCK
   5
 5A
 100
 AcDbEntity
-100
-AcDbLine
   8
 0
- 62
-256
-370
--1
- 48
-1.0
-  6
-BYLAYER
+100
+AcDbBlockBegin
+  2
+circular_gauge
+ 70
+0
  10
 0.0
  20
 0.0
  30
 0.0
- 11
-1.0
- 21
-0.0
- 31
-0.0
+  3
+circular_gauge
+  1
+
   0
 CIRCLE
   5
@@ -2247,39 +2217,9 @@ BYLAYER
  40
 1.5
   0
-LINE
-  5
-5E
-100
-AcDbEntity
-100
-AcDbLine
-  8
-0
- 62
-256
-370
--1
- 48
-1.0
-  6
-BYLAYER
- 10
-0.0
- 20
-0.0
- 30
-0.0
- 11
-34.7000000000000028
- 21
-0.0
- 31
-0.0
-  0
 CIRCLE
   5
-5F
+5E
 100
 AcDbEntity
 100
@@ -2305,7 +2245,7 @@ BYLAYER
   0
 CIRCLE
   5
-60
+5F
 100
 AcDbEntity
 100
@@ -2328,6 +2268,154 @@ BYLAYER
 0.0
  40
 1.5
+  0
+POINT
+  5
+60
+100
+AcDbEntity
+100
+AcDbPoint
+  8
+0
+ 62
+256
+370
+-1
+ 48
+1.0
+  6
+BYLAYER
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+  0
+ENDBLK
+  5
+61
+100
+AcDbEntity
+  8
+0
+100
+AcDbBlockEnd
+  0
+ENDSEC
+  0
+SECTION
+  2
+ENTITIES
+  0
+INSERT
+  5
+62
+100
+AcDbEntity
+100
+AcDbBlockReference
+  8
+0
+ 62
+256
+370
+-1
+ 48
+1.0
+  6
+BYLAYER
+  2
+circular_gauge
+ 10
+0.0
+ 20
+0.0
+ 30
+0.0
+  0
+INSERT
+  5
+63
+100
+AcDbEntity
+100
+AcDbBlockReference
+  8
+0
+ 62
+256
+370
+-1
+ 48
+1.0
+  6
+BYLAYER
+  2
+circular_gauge
+ 10
+90.0
+ 20
+0.0
+ 30
+0.0
+  0
+LINE
+  5
+64
+100
+AcDbEntity
+100
+AcDbLine
+  8
+0
+ 62
+256
+370
+-1
+ 48
+1.0
+  6
+BYLAYER
+ 10
+90.0
+ 20
+0.0
+ 30
+0.0
+ 11
+90.0
+ 21
+0.0
+ 31
+0.0
+  0
+INSERT
+  5
+65
+100
+AcDbEntity
+100
+AcDbBlockReference
+  8
+0
+ 62
+256
+370
+-1
+ 48
+1.0
+  6
+BYLAYER
+  2
+circular_gauge
+ 10
+180.0
+ 20
+0.0
+ 30
+0.0
   0
 ENDSEC
   0
@@ -2367,11 +2455,11 @@ E
   3
 AcDbVariableDictionary
 350
-61
+66
   3
 QCAD_OBJECTS
 350
-62
+67
   0
 DICTIONARY
   5
@@ -2835,7 +2923,7 @@ Layout2
   0
 DICTIONARY
   5
-61
+66
 100
 AcDbDictionary
 281
@@ -2843,15 +2931,15 @@ AcDbDictionary
   3
 DIMASSOC
 350
-64
+69
   3
 HIDETEXT
 350
-63
+68
   0
 DICTIONARYVAR
   5
-63
+68
 100
 DictionaryVariables
 280
@@ -2861,7 +2949,7 @@ DictionaryVariables
   0
 DICTIONARYVAR
   5
-64
+69
 100
 DictionaryVariables
 280
@@ -2871,7 +2959,7 @@ DictionaryVariables
   0
 DICTIONARY
   5
-62
+67
 100
 AcDbDictionary
 281
@@ -2879,193 +2967,193 @@ AcDbDictionary
   3
 ColorSettings/BackgroundColor
 350
-65
+6A
   3
 ColorSettings/ColorMode
 350
-66
+6B
   3
 Grid/DisplayGrid00
 350
-67
+6C
   3
 Grid/DisplayGrid01
 350
-68
+6D
   3
 Grid/DisplayGrid02
 350
-69
+6E
   3
 Grid/DisplayGrid03
 350
-6A
+6F
   3
 Grid/GridSpacingX00
 350
-6B
+70
   3
 Grid/GridSpacingX01
 350
-6C
+71
   3
 Grid/GridSpacingX02
 350
-6D
+72
   3
 Grid/GridSpacingX03
 350
-6E
+73
   3
 Grid/GridSpacingY00
 350
-6F
+74
   3
 Grid/GridSpacingY01
 350
-70
+75
   3
 Grid/GridSpacingY02
 350
-71
+76
   3
 Grid/GridSpacingY03
 350
-72
+77
   3
 Grid/IsometricGrid00
 350
-73
+78
   3
 Grid/IsometricGrid01
 350
-74
+79
   3
 Grid/IsometricGrid02
 350
-75
+7A
   3
 Grid/IsometricGrid03
 350
-76
+7B
   3
 Grid/IsometricProjection00
 350
-77
+7C
   3
 Grid/IsometricProjection01
 350
-78
+7D
   3
 Grid/IsometricProjection02
 350
-79
+7E
   3
 Grid/IsometricProjection03
 350
-7A
+7F
   3
 Grid/MetaGridSpacingX00
 350
-7B
+80
   3
 Grid/MetaGridSpacingX01
 350
-7C
+81
   3
 Grid/MetaGridSpacingX02
 350
-7D
+82
   3
 Grid/MetaGridSpacingX03
 350
-7E
+83
   3
 Grid/MetaGridSpacingY00
 350
-7F
+84
   3
 Grid/MetaGridSpacingY01
 350
-80
+85
   3
 Grid/MetaGridSpacingY02
 350
-81
+86
   3
 Grid/MetaGridSpacingY03
 350
-82
+87
   3
 MultiPageSettings/Columns
 350
-83
+88
   3
 MultiPageSettings/GlueMarginsBottom
 350
-84
+89
   3
 MultiPageSettings/GlueMarginsLeft
 350
-85
+8A
   3
 MultiPageSettings/GlueMarginsRight
 350
-86
+8B
   3
 MultiPageSettings/GlueMarginsTop
 350
-87
+8C
   3
 MultiPageSettings/PrintCropMarks
 350
-88
+8D
   3
 MultiPageSettings/Rows
 350
-89
+8E
   3
 PageSettings/OffsetX
 350
-8A
+8F
   3
 PageSettings/OffsetY
 350
-8B
+90
   3
 PageSettings/PageOrientation
 350
-8C
+91
   3
 PageSettings/PaperHeight
 350
-8D
+92
   3
 PageSettings/PaperWidth
 350
-8E
+93
   3
 PageSettings/Scale
 350
-8F
+94
   3
 PageSettings/ShowPaperBorders
 350
-90
+95
   3
 QCADVersion
 350
-91
+96
   3
 UnitSettings/PaperUnit
 350
-92
+97
   0
 XRECORD
   5
-65
+6A
 330
-62
+67
 100
 AcDbXrecord
 280
@@ -3075,9 +3163,9 @@ White
   0
 XRECORD
   5
-66
+6B
 330
-62
+67
 100
 AcDbXrecord
 280
@@ -3087,117 +3175,57 @@ FullColor
   0
 XRECORD
   5
-67
-330
-62
-100
-AcDbXrecord
-280
-1
-290
-1
-  0
-XRECORD
-  5
-68
-330
-62
-100
-AcDbXrecord
-280
-1
-290
-1
-  0
-XRECORD
-  5
-69
-330
-62
-100
-AcDbXrecord
-280
-1
-290
-1
-  0
-XRECORD
-  5
-6A
-330
-62
-100
-AcDbXrecord
-280
-1
-290
-1
-  0
-XRECORD
-  5
-6B
-330
-62
-100
-AcDbXrecord
-280
-1
-1000
-auto
-  0
-XRECORD
-  5
 6C
 330
-62
+67
 100
 AcDbXrecord
 280
 1
-1000
-auto
+290
+1
   0
 XRECORD
   5
 6D
 330
-62
+67
 100
 AcDbXrecord
 280
 1
-1000
-auto
+290
+1
   0
 XRECORD
   5
 6E
 330
-62
+67
 100
 AcDbXrecord
 280
 1
-1000
-auto
+290
+1
   0
 XRECORD
   5
 6F
 330
-62
+67
 100
 AcDbXrecord
 280
 1
-1000
-auto
+290
+1
   0
 XRECORD
   5
 70
 330
-62
+67
 100
 AcDbXrecord
 280
@@ -3209,7 +3237,7 @@ XRECORD
   5
 71
 330
-62
+67
 100
 AcDbXrecord
 280
@@ -3221,7 +3249,7 @@ XRECORD
   5
 72
 330
-62
+67
 100
 AcDbXrecord
 280
@@ -3233,91 +3261,115 @@ XRECORD
   5
 73
 330
-62
+67
 100
 AcDbXrecord
 280
 1
-290
-0
+1000
+auto
   0
 XRECORD
   5
 74
 330
-62
+67
 100
 AcDbXrecord
 280
 1
-290
-0
+1000
+auto
   0
 XRECORD
   5
 75
 330
-62
+67
 100
 AcDbXrecord
 280
 1
-290
-0
+1000
+auto
   0
 XRECORD
   5
 76
 330
-62
+67
 100
 AcDbXrecord
 280
 1
-290
-0
+1000
+auto
   0
 XRECORD
   5
 77
 330
-62
+67
 100
 AcDbXrecord
 280
 1
- 90
-0
+1000
+auto
   0
 XRECORD
   5
 78
 330
-62
+67
 100
 AcDbXrecord
 280
 1
- 90
+290
 0
   0
 XRECORD
   5
 79
 330
-62
+67
 100
 AcDbXrecord
 280
 1
- 90
+290
 0
   0
 XRECORD
   5
 7A
 330
-62
+67
+100
+AcDbXrecord
+280
+1
+290
+0
+  0
+XRECORD
+  5
+7B
+330
+67
+100
+AcDbXrecord
+280
+1
+290
+0
+  0
+XRECORD
+  5
+7C
+330
+67
 100
 AcDbXrecord
 280
@@ -3327,69 +3379,45 @@ AcDbXrecord
   0
 XRECORD
   5
-7B
-330
-62
-100
-AcDbXrecord
-280
-1
-1000
-auto
-  0
-XRECORD
-  5
-7C
-330
-62
-100
-AcDbXrecord
-280
-1
-1000
-auto
-  0
-XRECORD
-  5
 7D
 330
-62
+67
 100
 AcDbXrecord
 280
 1
-1000
-auto
+ 90
+0
   0
 XRECORD
   5
 7E
 330
-62
+67
 100
 AcDbXrecord
 280
 1
-1000
-auto
+ 90
+0
   0
 XRECORD
   5
 7F
 330
-62
+67
 100
 AcDbXrecord
 280
 1
-1000
-auto
+ 90
+0
   0
 XRECORD
   5
 80
 330
-62
+67
 100
 AcDbXrecord
 280
@@ -3401,7 +3429,7 @@ XRECORD
   5
 81
 330
-62
+67
 100
 AcDbXrecord
 280
@@ -3413,7 +3441,7 @@ XRECORD
   5
 82
 330
-62
+67
 100
 AcDbXrecord
 280
@@ -3425,7 +3453,67 @@ XRECORD
   5
 83
 330
-62
+67
+100
+AcDbXrecord
+280
+1
+1000
+auto
+  0
+XRECORD
+  5
+84
+330
+67
+100
+AcDbXrecord
+280
+1
+1000
+auto
+  0
+XRECORD
+  5
+85
+330
+67
+100
+AcDbXrecord
+280
+1
+1000
+auto
+  0
+XRECORD
+  5
+86
+330
+67
+100
+AcDbXrecord
+280
+1
+1000
+auto
+  0
+XRECORD
+  5
+87
+330
+67
+100
+AcDbXrecord
+280
+1
+1000
+auto
+  0
+XRECORD
+  5
+88
+330
+67
 100
 AcDbXrecord
 280
@@ -3435,9 +3523,9 @@ AcDbXrecord
   0
 XRECORD
   5
-84
+89
 330
-62
+67
 100
 AcDbXrecord
 280
@@ -3447,9 +3535,9 @@ AcDbXrecord
   0
 XRECORD
   5
-85
+8A
 330
-62
+67
 100
 AcDbXrecord
 280
@@ -3459,9 +3547,9 @@ AcDbXrecord
   0
 XRECORD
   5
-86
+8B
 330
-62
+67
 100
 AcDbXrecord
 280
@@ -3471,9 +3559,9 @@ AcDbXrecord
   0
 XRECORD
   5
-87
+8C
 330
-62
+67
 100
 AcDbXrecord
 280
@@ -3483,9 +3571,9 @@ AcDbXrecord
   0
 XRECORD
   5
-88
+8D
 330
-62
+67
 100
 AcDbXrecord
 280
@@ -3495,9 +3583,9 @@ AcDbXrecord
   0
 XRECORD
   5
-89
+8E
 330
-62
+67
 100
 AcDbXrecord
 280
@@ -3507,9 +3595,9 @@ AcDbXrecord
   0
 XRECORD
   5
-8A
+8F
 330
-62
+67
 100
 AcDbXrecord
 280
@@ -3519,9 +3607,9 @@ AcDbXrecord
   0
 XRECORD
   5
-8B
+90
 330
-62
+67
 100
 AcDbXrecord
 280
@@ -3531,9 +3619,9 @@ AcDbXrecord
   0
 XRECORD
   5
-8C
+91
 330
-62
+67
 100
 AcDbXrecord
 280
@@ -3543,9 +3631,9 @@ Portrait
   0
 XRECORD
   5
-8D
+92
 330
-62
+67
 100
 AcDbXrecord
 280
@@ -3555,9 +3643,9 @@ AcDbXrecord
   0
 XRECORD
   5
-8E
+93
 330
-62
+67
 100
 AcDbXrecord
 280
@@ -3567,9 +3655,9 @@ AcDbXrecord
   0
 XRECORD
   5
-8F
+94
 330
-62
+67
 100
 AcDbXrecord
 280
@@ -3579,9 +3667,9 @@ AcDbXrecord
   0
 XRECORD
   5
-90
+95
 330
-62
+67
 100
 AcDbXrecord
 280
@@ -3591,9 +3679,9 @@ AcDbXrecord
   0
 XRECORD
   5
-91
+96
 330
-62
+67
 100
 AcDbXrecord
 280
@@ -3603,9 +3691,9 @@ AcDbXrecord
   0
 XRECORD
   5
-92
+97
 330
-62
+67
 100
 AcDbXrecord
 280
