@@ -22,9 +22,9 @@
 #define SLEEP_DELAY   2000000
 #define ATTACK 125000
 #define RELEASE 1000000
-char meterPins[3] =  {3,10,11};
-char targetValues[METERS];
-char currentValues[METERS];
+int meterPins[3] =  {3,10,11};
+int targetValues[METERS];
+int currentValues[METERS];
 int meterVelocity[METERS];
 int charsReceived = 0;
 
@@ -90,9 +90,9 @@ void updatePin(int meter) {
  * For a given meter, calculate the next time we should move the meter.
  */
 void updateScheduleForMeter(int meter) {
-  char targetValue = targetValues[meter];
-  char currentValue = currentValues[meter];
-  char deltaValue = (char) abs((int) targetValue - (int) currentValue);
+  int targetValue = targetValues[meter];
+  int currentValue = currentValues[meter];
+  int deltaValue = abs(targetValue - currentValue);
   unsigned long remainingTime = max(targetTime - currentTime, (targetValue > currentValue) ? ATTACK : RELEASE); // currentTime global is updated in the loop.
   if (remainingTime > 0) {
     if (targetValue != currentValue) {
@@ -113,7 +113,7 @@ void updateScheduleForMeter(int meter) {
 void serialEvent() {
   while (Serial.available()) {
     // get the new byte:
-    char inChar = (char) Serial.read();
+    int inChar = (int) Serial.read();
     targetValues[charsReceived] = inChar;
     charsReceived++;
     if (charsReceived == METERS) {
