@@ -1,4 +1,4 @@
-#!/usr/bin/python2.7
+#!/usr/bin/python
 '''
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ class meter:
 	'''
 
 	def __init__(self, interval):
-		print "initializing"
+		print("initializing")
 		self.ser = serial.Serial('/dev/ttyACM0')
 		self.interval = interval
 		self.maxDiskDelta = 1.0
@@ -38,7 +38,7 @@ class meter:
 	def getCpu(self):
 		loads = [(i/100.) for i in psutil.cpu_percent(self.interval, True)]
 		usage = (sum(loads)/len(loads) + max(loads))/2 # adjusted usage = avg + max / 2
-                return self.trim(int((usage)*255))
+		return self.trim(int((usage)*255))
 
 	def getDisk(self):
 		writes = psutil.disk_io_counters().write_count
@@ -60,15 +60,14 @@ class meter:
 	
 	def run(self):
 		while(True):
-
 			cpu = self.getCpu()
 			mem = self.getMem()
 			disk = self.getDisk()
 			time.sleep(self.interval)
-			print 'serial command = ' + str(cpu) + ' ' + str(disk) + ' ' + str(mem)
-			self.ser.write(chr(cpu))
-			self.ser.write(chr(disk))			
-			self.ser.write(chr(mem))
+			print('serial command = ' + str(cpu) + ' ' + str(disk) + ' ' + str(mem))
+			self.ser.write(cpu.to_bytes(1,'big'))
+			self.ser.write(disk.to_bytes(1,'big'))
+			self.ser.write(mem.to_bytes(1,'big'))
 			
 			
 			
