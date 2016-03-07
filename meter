@@ -14,7 +14,8 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 import psutil, serial, time
-
+POLLING_HZ=5
+POLLING_PERIOD=1.0/POLLING_HZ
 
 
 class meter:
@@ -74,5 +75,5 @@ class meter:
 
 
 if __name__ == "__main__":
-	thismeter = meter(0.05)
+	thismeter = meter(POLLING_PERIOD)
 	thismeter.run()

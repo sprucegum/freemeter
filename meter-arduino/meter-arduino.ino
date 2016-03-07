@@ -18,8 +18,8 @@
   Author: Jade Lacosse
  */
 #define METERS 3
-#define MESSAGE_DELAY 1000000
-#define SLEEP_DELAY   5000000
+#define ONE_SECOND 1000000
+#define SLEEP_DELAY   2000000
 int meterPins[3] =  {3,10,11};
 int targetValues[METERS];
 int currentValues[METERS];
@@ -27,9 +27,9 @@ int meterVelocity[METERS];
 int charsReceived = 0;
 
 unsigned long nextTick[METERS];
-unsigned long messageDelay = MESSAGE_DELAY; // 1 second to start
+unsigned long messageDelay = ONE_SECOND; // 1 second to start
 unsigned long currentTime = micros();
-unsigned long oldTime = currentTime;
+unsigned long lastMessageTime = currentTime;
 unsigned long targetTime = currentTime + messageDelay; // when we think we'll get the next serial update
 
 bool dataReady = false;
@@ -58,7 +58,7 @@ void loop() {
       }
     }
   }
-  if ((currentTime - oldTime) > SLEEP_DELAY) {
+  if ((currentTime - lastMessageTime) > SLEEP_DELAY) {
     sleep();
   }
 }
@@ -71,8 +71,8 @@ void sleep() {
     targetValues[meter] = 0;
   }
   charsReceived = 0;
-  targetTime = currentTime + MESSAGE_DELAY;
-  oldTime = currentTime;
+  targetTime = currentTime + ONE_SECOND;
+  lastMessageTime = currentTime;
 }
 
 /**
@@ -88,15 +88,14 @@ void updatePin(int meter) {
  * For a given meter, calculate the next time we should move the meter.
  */
 void updateScheduleForMeter(int meter) {
-  //int currentTime = micros();
-  int targetValue = targetValues[meter];
-  int currentValue = currentValues[meter];
-  int deltaValue = targetValue - currentValue;
-  unsigned long remainingTime = max((targetTime - currentTime) + messageDelay/20, 1000000); // currentTime global is updated in the loop.
+  char targetValue = targetValues[meter];
+  char currentValue = currentValues[meter];
+  char deltaValue = (char) abs((int) targetValue - (int) currentValue);
+  unsigned long remainingTime = max((targetTime - currentTime) + messageDelay/20, 250000); // currentTime global is updated in the loop.
   if (remainingTime > 0) {
-    if (deltaValue) {
+    if (targetValue != currentValue) {
       nextTick[meter] = (remainingTime/abs(deltaValue)) + currentTime;
-      meterVelocity[meter] = (deltaValue > 0) ? 1 : -1; 
+      meterVelocity[meter] = (targetValue > currentValue) ? 1 : -1; 
     }
   } else {
     meterVelocity[meter] = 0;
@@ -117,8 +116,8 @@ void serialEvent() {
     charsReceived++;
     if (charsReceived == METERS) {
       currentTime = micros();
-      messageDelay = currentTime - oldTime;
-      oldTime = currentTime;
+      messageDelay = currentTime - lastMessageTime;
+      lastMessageTime = currentTime;
       targetTime = currentTime + messageDelay;
       charsReceived = 0;
       if (!dataReady) {
