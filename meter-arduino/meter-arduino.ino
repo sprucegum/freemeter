@@ -118,7 +118,7 @@ void serialEvent() {
     charsReceived++;
     if (charsReceived == METERS) {
       currentTime = micros();
-      messageDelay = min(ONE_SECOND, max(currentTime - lastMessageTime, 10000)); // Limit to 1000hz.
+      messageDelay = min(ONE_SECOND, max(currentTime - lastMessageTime, 10000)); // Limit to 1-1000hz.
       lastMessageTime = currentTime;
       targetTime = currentTime + messageDelay;
       charsReceived = 0;
