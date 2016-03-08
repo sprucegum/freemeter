@@ -18,10 +18,10 @@
   Author: Jade Lacosse
  */
 #define METERS 3
-#define ONE_SECOND 1000000
-#define SLEEP_DELAY   2000000
-#define ATTACK 125000
-#define RELEASE 1000000
+#define ONE_SECOND  1000000
+#define SLEEP_DELAY 2000000
+#define ATTACK      125000
+#define RELEASE     1000000
 int meterPins[3] =  {3,10,11};
 int targetValues[METERS];
 int currentValues[METERS];
@@ -73,8 +73,9 @@ void sleep() {
     targetValues[meter] = 0;
   }
   charsReceived = 0;
-  targetTime = currentTime + ONE_SECOND;
   lastMessageTime = currentTime;
+  targetTime = currentTime + SLEEP_DELAY;
+  Serial.write(42);
 }
 
 /**
@@ -94,12 +95,11 @@ void updateScheduleForMeter(int meter) {
   int currentValue = currentValues[meter];
   int deltaValue = abs(targetValue - currentValue);
   unsigned long remainingTime = max(targetTime - currentTime, (targetValue > currentValue) ? ATTACK : RELEASE); // currentTime global is updated in the loop.
-  if (remainingTime > 0) {
-    if (targetValue != currentValue) {
+  if (deltaValue) {
       nextTick[meter] = (remainingTime/abs(deltaValue)) + currentTime;
-      meterVelocity[meter] = (targetValue > currentValue) ? 1 : -1; 
-    }
+      meterVelocity[meter] = (targetValue > currentValue) ? 1 : -1;
   } else {
+    nextTick[meter]= currentTime + remainingTime;
     meterVelocity[meter] = 0;
   }
 }
@@ -118,7 +118,7 @@ void serialEvent() {
     charsReceived++;
     if (charsReceived == METERS) {
       currentTime = micros();
-      messageDelay = currentTime - lastMessageTime;
+      messageDelay = min(ONE_SECOND, max(currentTime - lastMessageTime, 10000)); // Limit to 1000hz.
       lastMessageTime = currentTime;
       targetTime = currentTime + messageDelay;
       charsReceived = 0;

@@ -14,7 +14,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 import psutil, serial, time
-POLLING_HZ=5
+POLLING_HZ=20
 POLLING_PERIOD=1.0/POLLING_HZ
 
 
@@ -63,12 +63,11 @@ class meter:
 			cpu = self.getCpu()
 			mem = self.getMem()
 			disk = self.getDisk()
-			time.sleep(self.interval)
 			print('serial command = ' + str(cpu) + ' ' + str(disk) + ' ' + str(mem))
 			self.ser.write(cpu.to_bytes(1,'big'))
 			self.ser.write(disk.to_bytes(1,'big'))
 			self.ser.write(mem.to_bytes(1,'big'))
-			
+			time.sleep(self.interval)
 			
 			
 
