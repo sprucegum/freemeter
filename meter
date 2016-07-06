@@ -13,7 +13,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
-import psutil, serial, time
+import psutil, serial, time, random
 POLLING_HZ=20
 POLLING_PERIOD=1.0/POLLING_HZ
 
@@ -37,7 +37,8 @@ class meter:
 		
 	def getCpu(self):
 		loads = [(i/100.) for i in psutil.cpu_percent(self.interval, True)]
-		usage = (sum(loads)/len(loads) + max(loads))/2 # adjusted usage = avg + max / 2
+		usage = random.choice(loads)
+		#usage = (sum(loads)/len(loads) + max(loads))/2 # adjusted usage = avg + max / 2
 		return self.trim(int((usage)*255))
 
 	def getDisk(self):
@@ -49,13 +50,13 @@ class meter:
 		#print 'diskDelta:' + str(diskDelta)
 		#print 'maxDiskDelta:' + str(self.maxDiskDelta)
 		self.maxDiskDelta = max(diskDelta, self.maxDiskDelta)
-		self.maxDiskDelta -= self.maxDiskDelta/60
+		self.maxDiskDelta -= self.maxDiskDelta/(60*POLLING_HZ)
 		self.maxDiskDelta = max(0, self.maxDiskDelta)
 		return self.trim((int((float(diskDelta)/float(self.maxDiskDelta))*255)))
 		
 	def getMem(self):
 		# total,used,free,percentusage = psutil.phymem_usage()
-		total, available, percentusage, used, free, active, inactive, buffers, cached = psutil.virtual_memory()
+		total, available, percentusage, used, free, active, inactive, buffers, cached, shared = psutil.virtual_memory()
 		return self.trim(int((percentusage/100.0)*255))
 	
 	def run(self):

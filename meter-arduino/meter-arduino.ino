@@ -21,7 +21,7 @@
 #define ONE_SECOND  1000000
 #define SLEEP_DELAY 2000000
 #define ATTACK      125000
-#define RELEASE     1000000
+#define RELEASE     2000000
 int meterPins[3] =  {3,10,11};
 int targetValues[METERS];
 int currentValues[METERS];
