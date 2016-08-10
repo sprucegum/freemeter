@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 '''
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -62,12 +62,7 @@ class meter:
 	def run(self):
 		while(True):
 			cpu = self.getCpu()
-			mem = self.getMem()
-			disk = self.getDisk()
-			print('serial command = ' + str(cpu) + ' ' + str(disk) + ' ' + str(mem))
 			self.ser.write(cpu.to_bytes(1,'big'))
-			self.ser.write(disk.to_bytes(1,'big'))
-			self.ser.write(mem.to_bytes(1,'big'))
 			time.sleep(self.interval)
 			
 			
