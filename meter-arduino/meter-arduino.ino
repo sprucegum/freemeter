@@ -17,12 +17,12 @@
   Simple 3-Gauge Meter
   Author: Jade Lacosse
  */
-#define METERS 1
+#define METERS 2
 #define ONE_SECOND  1000000
 #define SLEEP_DELAY 2000000
 #define ATTACK      125000
 #define RELEASE     2000000
-int meterPins[1] =  {11};
+int meterPins[2] =  {11,10};
 int targetValues[METERS];
 int currentValues[METERS];
 int meterVelocity[METERS];

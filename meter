@@ -16,7 +16,8 @@
 import psutil, serial, time, random
 POLLING_HZ=20
 POLLING_PERIOD=1.0/POLLING_HZ
-
+#PORT = '/dev/ttyACM0'
+PORT = '/dev/ttyUSB0'
 
 class meter:
 	'''
@@ -26,7 +27,7 @@ class meter:
 
 	def __init__(self, interval):
 		print("initializing")
-		self.ser = serial.Serial('/dev/ttyACM0')
+		self.ser = serial.Serial(PORT)
 		self.interval = interval
 		self.maxDiskDelta = 1.0
 		self.lastDisk = psutil.disk_io_counters().write_count + psutil.disk_io_counters().read_count
@@ -62,7 +63,10 @@ class meter:
 	def run(self):
 		while(True):
 			cpu = self.getCpu()
-			self.ser.write(cpu.to_bytes(1,'big'))
+			mem = self.getMem()
+			#print("cpu:" + str(cpu) + " mem:" + str(mem))
+			self.ser.write(cpu.to_bytes(1, 'big'))
+			self.ser.write(mem.to_bytes(1, 'big'))
 			time.sleep(self.interval)
 			
 			
