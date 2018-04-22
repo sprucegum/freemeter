@@ -57,7 +57,8 @@ class meter:
 		
 	def getMem(self):
 		# total,used,free,percentusage = psutil.phymem_usage()
-		total, available, percentusage, used, free, active, inactive, buffers, cached, shared = psutil.virtual_memory()
+		vmem = psutil.virtual_memory()
+		percentusage = vmem.percent 
 		return self.trim(int((percentusage/100.0)*255))
 	
 	def run(self):
