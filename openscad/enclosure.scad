@@ -29,7 +29,7 @@ arduinoTranslateX = -53.4/2; // half the arduino width
 
 backplateThickness = 8;
 backplateLength = (cos(faceAngle) * baseDepth) + (tan(faceAngle) * baseHeight);
-export_mode = 1; // When export mode is on, remove the arduino and gauge.
+export_mode = 0; // When export mode is on, remove the arduino and gauge.
 backplate_only = 0;
 meterColor = [0.4, 0.4, 0.4];
 
@@ -131,15 +131,12 @@ module Enclosure (backplate_mode = 0) {
                 //Arduino();
             }
         }
-        if (!export_mode) {
-          Arduino();
-        }
         // Arduino Standoffs
         translate ([arduinoTranslateX, 0, baseHeight - arduinoInset]) {
-            standoffs (height = standoffsHeight, mountType=0);
+            standoffs(height = standoffsHeight, mountType=0);
             if (!export_mode) {
                 translate([0, 0, standoffsHeight]) {
-                    Arduino();
+                    arduino();
                 }
             }
         }
