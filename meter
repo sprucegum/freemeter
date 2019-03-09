@@ -18,6 +18,7 @@ POLLING_HZ=20
 POLLING_PERIOD=1.0/POLLING_HZ
 #PORT = '/dev/ttyACM0'
 PORT = '/dev/ttyUSB0'
+#PORT = '/dev/ttyS0'
 
 class meter:
 	'''
@@ -30,7 +31,8 @@ class meter:
 		self.ser = serial.Serial(PORT)
 		self.interval = interval
 		self.maxDiskDelta = 1.0
-		self.lastDisk = psutil.disk_io_counters().write_count + psutil.disk_io_counters().read_count
+		self.lastDisk = 0
+		#self.lastDisk = psutil.disk_io_counters().write_count + psutil.disk_io_counters().read_count
 		
 
 	def trim(self, x):
@@ -43,8 +45,9 @@ class meter:
 		return self.trim(int((usage)*255))
 
 	def getDisk(self):
-		writes = psutil.disk_io_counters().write_count
-		reads = psutil.disk_io_counters().read_count
+		iocounters = psutil.disk_io_counters()
+		writes = iocounters.write_count
+		reads = iocounters.read_count
 		currentDisk = writes + reads
 		diskDelta = currentDisk - self.lastDisk
 		self.lastDisk = currentDisk

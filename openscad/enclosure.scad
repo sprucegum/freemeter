@@ -29,8 +29,8 @@ arduinoTranslateX = -53.4/2; // half the arduino width
 
 backplateThickness = 8;
 backplateLength = (cos(faceAngle) * baseDepth) + (tan(faceAngle) * baseHeight);
-export_mode = 0; // When export mode is on, remove the arduino and gauge.
-backplate_only = 1;
+export_mode = 1; // When export mode is on, remove the arduino and gauge.
+backplate_only = 0;
 meterColor = [0.4, 0.4, 0.4];
 
 if (backplate_only) {
@@ -126,20 +126,20 @@ module Enclosure (backplate_mode = 0) {
             // Arduino cutout
             translate([arduinoTranslateX, 0, baseHeight - arduinoInset]) {
                 wiggleRoom = 0.5;
-                //translate([wiggleRoom, 3, 0]) boundingBox();
-                //translate([-wiggleRoom, 3, 0]) boundingBox();
-                ArduinoUno();
+                translate([wiggleRoom, 3, 0]) boundingBox();
+                translate([-wiggleRoom, 3, 0]) boundingBox();
+                //Arduino();
             }
         }
         if (!export_mode) {
-          ArduinoUno();
+          Arduino();
         }
         // Arduino Standoffs
         translate ([arduinoTranslateX, 0, baseHeight - arduinoInset]) {
             standoffs (height = standoffsHeight, mountType=0);
             if (!export_mode) {
                 translate([0, 0, standoffsHeight]) {
-                    ArduinoUno();
+                    Arduino();
                 }
             }
         }
@@ -160,6 +160,6 @@ module ArduinoUno() {
   translate ([2.4,15.2,0]) {
     //rotate ([0,0,90]) Arduino();
   }
-  components();
+  //components();
 }
 
