@@ -1,7 +1,7 @@
 
 # FreeMeter
 
-This repo contains the Arduino C code, Python based OS driver, and OpenSCAD designs for this 3D printable Analog CPU/RAM gauge project.
+This repo contains the Arduino C code, Python based OS driver, and OpenSCAD designs for this [3D printable Analog CPU/RAM gauge project](https://www.thingiverse.com/thing:3484111).
 
 # Usage
 
