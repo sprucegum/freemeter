@@ -1,4 +1,4 @@
-# !/usr/bin/python3
+#!/usr/bin/python3
 '''
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -33,35 +33,20 @@ class meter:
         self.lastDisk = psutil.disk_io_counters().write_count + psutil.disk_io_counters().read_count
 
     def serialConnect(self):
-        self.ser = serial.Serial('/dev/ttyACM0')
+        self.ser = serial.Serial('COM3')
 
-    def trim(self, x):
+    # Limit values between 0 and 255
+    def clamp(self, x):
         return min(255, max(0, x))
 
     def getCpu(self):
         loads = [(i / 100.) for i in psutil.cpu_percent(self.interval, True)]
         usage = random.choice(loads)
-        # usage = (sum(loads)/len(loads) + max(loads))/2 # adjusted usage = avg + max / 2
-        return self.trim(int((usage) * 255))
-
-    def getDisk(self):
-        writes = psutil.disk_io_counters().write_count
-        reads = psutil.disk_io_counters().read_count
-        currentDisk = writes + reads
-        diskDelta = currentDisk - self.lastDisk
-        self.lastDisk = currentDisk
-        # print 'diskDelta:' + str(diskDelta)
-        # print 'maxDiskDelta:' + str(self.maxDiskDelta)
-        self.maxDiskDelta = max(diskDelta, self.maxDiskDelta)
-        self.maxDiskDelta -= self.maxDiskDelta / (60 * POLLING_HZ)
-        self.maxDiskDelta = max(0, self.maxDiskDelta)
-        return self.trim((int((float(diskDelta) / float(self.maxDiskDelta)) * 255)))
+        return self.clamp(int((usage) * 255))
 
     def getMem(self):
-        # total,used,free,percentusage = psutil.phymem_usage()
-        # total, available, percentusage, used, free, active, inactive, buffers, cached, shared = psutil.virtual_memory()
         vm = psutil.virtual_memory()
-        return self.trim(int((vm.percentusage / 100.0) * 255))
+        return self.clamp(int((vm.percentusage / 100.0) * 255))
 
     def run(self):
         while (True):
