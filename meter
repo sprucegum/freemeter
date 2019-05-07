@@ -41,6 +41,9 @@ class meter:
     def clamp(self, x):
         return min(255, max(0, x))
 
+    def writeByte(self, i):
+        self.ser.write(int(i).to_bytes(1, 'big'))
+
     def getCpu(self):
         loads = [(i / 100.) for i in psutil.cpu_percent(self.interval, True)]
         usage = random.choice(loads)
@@ -53,13 +56,16 @@ class meter:
     def run(self):
         while (True):
             try:
-                cpu = self.getCpu()
-                # mem = self.getMem()
-                # disk = self.getDisk()
-                # print('serial command = ' + str(cpu) + ' ' + str(disk) + ' ' + str(mem))
-                self.ser.write(cpu.to_bytes(1, 'big'))
-                # self.ser.write(disk.to_bytes(1,'big'))
-                # self.ser.write(mem.to_bytes(1,'big'))
+                for pin, stat in self.config['pins'].items():
+                    if stat == 'CPU':
+                        stat = self.getCpu()
+                    if stat == 'RAM':
+                        stat = self.getMem()
+                    self.writeByte(pin)
+                    self.writeByte(stat)
+                # two 255 characters signals to the meter that the command is complete.
+                self.writeByte(255)
+                self.writeByte(255)
                 time.sleep(self.interval)
             except Exception as e:
                 print(e)
