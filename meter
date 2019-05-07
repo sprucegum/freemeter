@@ -51,19 +51,22 @@ class meter:
 
     def getMem(self):
         vm = psutil.virtual_memory()
-        return self.clamp(int((vm.percentusage / 100.0) * 255))
+        return self.clamp(int((vm.percent / 100.0) * 255))
 
     def run(self):
         while (True):
             try:
+                self.ser.timeout = 0.1
                 for pin, stat in self.config['pins'].items():
+                    statVal = -1
                     if stat == 'CPU':
-                        stat = self.getCpu()
+                        statVal = self.getCpu()
                     if stat == 'RAM':
-                        stat = self.getMem()
-                    self.writeByte(pin)
-                    self.writeByte(stat)
-                # two 255 characters signals to the meter that the command is complete.
+                        statVal = self.getMem()
+                    if statVal >= 0:
+                        self.writeByte(pin)
+                        self.writeByte(statVal)
+            # two 255 characters signals to the meter that the command is complete.
                 self.writeByte(255)
                 self.writeByte(255)
                 time.sleep(self.interval)
