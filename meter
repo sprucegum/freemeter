@@ -13,69 +13,70 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
-import psutil, serial, time, random
-POLLING_HZ=20
-POLLING_PERIOD=1.0/POLLING_HZ
-#PORT = '/dev/ttyACM0'
-PORT = '/dev/ttyUSB0'
-#PORT = '/dev/ttyS0'
+import psutil, serial, time, random, yaml
+
+POLLING_HZ = 20
+POLLING_PERIOD = 1.0 / POLLING_HZ
+
 
 class meter:
-	'''
-		@todo: autodetect the serial port
-		@todo: add a frames per second metric
-	'''
+    '''
+            @todo: autodetect the serial port
+            @todo: add a frames per second metric
+    '''
 
-	def __init__(self, interval):
-		print("initializing")
-		self.ser = serial.Serial(PORT)
-		self.interval = interval
-		self.maxDiskDelta = 1.0
-		self.lastDisk = 0
-		#self.lastDisk = psutil.disk_io_counters().write_count + psutil.disk_io_counters().read_count
-		
+    def __init__(self, interval):
+        print("initializing")
+        with open('meter_config.yaml') as c:
+            self.config = yaml.load(c.read())
+        self.serialConnect()
+        self.interval = interval
+        self.maxDiskDelta = 1.0
+        self.lastDisk = psutil.disk_io_counters().write_count + psutil.disk_io_counters().read_count
 
-	def trim(self, x):
-		return min(255,max(0,x))		
-		
-	def getCpu(self):
-		loads = [(i/100.) for i in psutil.cpu_percent(self.interval, True)]
-		usage = random.choice(loads)
-		#usage = (sum(loads)/len(loads) + max(loads))/2 # adjusted usage = avg + max / 2
-		return self.trim(int((usage)*255))
+    def serialConnect(self):
+        self.ser = serial.Serial(self.config['port'])
 
-	def getDisk(self):
-		iocounters = psutil.disk_io_counters()
-		writes = iocounters.write_count
-		reads = iocounters.read_count
-		currentDisk = writes + reads
-		diskDelta = currentDisk - self.lastDisk
-		self.lastDisk = currentDisk
-		#print 'diskDelta:' + str(diskDelta)
-		#print 'maxDiskDelta:' + str(self.maxDiskDelta)
-		self.maxDiskDelta = max(diskDelta, self.maxDiskDelta)
-		self.maxDiskDelta -= self.maxDiskDelta/(60*POLLING_HZ)
-		self.maxDiskDelta = max(0, self.maxDiskDelta)
-		return self.trim((int((float(diskDelta)/float(self.maxDiskDelta))*255)))
-		
-	def getMem(self):
-		# total,used,free,percentusage = psutil.phymem_usage()
-		vmem = psutil.virtual_memory()
-		percentusage = vmem.percent 
-		return self.trim(int((percentusage/100.0)*255))
-	
-	def run(self):
-		while(True):
-			cpu = self.getCpu()
-			mem = self.getMem()
-			#print("cpu:" + str(cpu) + " mem:" + str(mem))
-			self.ser.write(cpu.to_bytes(1, 'big'))
-			self.ser.write(mem.to_bytes(1, 'big'))
-			time.sleep(self.interval)
-			
-			
+    # Limit values between 0 and 255
+    def clamp(self, x):
+        return min(255, max(0, x))
+
+    def writeByte(self, i):
+        self.ser.write(int(i).to_bytes(1, 'big'))
+
+    def getCpu(self):
+        loads = [(i / 100.) for i in psutil.cpu_percent(self.interval, True)]
+        usage = random.choice(loads)
+        return self.clamp(int((usage) * 255))
+
+    def getMem(self):
+        vm = psutil.virtual_memory()
+        return self.clamp(int((vm.percentusage / 100.0) * 255))
+
+    def run(self):
+        while (True):
+            try:
+                for pin, stat in self.config['pins'].items():
+                    if stat == 'CPU':
+                        stat = self.getCpu()
+                    if stat == 'RAM':
+                        stat = self.getMem()
+                    self.writeByte(pin)
+                    self.writeByte(stat)
+                # two 255 characters signals to the meter that the command is complete.
+                self.writeByte(255)
+                self.writeByte(255)
+                time.sleep(self.interval)
+            except Exception as e:
+                print(e)
+                self.ser.close()
+                time.sleep(5)
+                try:
+                    self.serialConnect()
+                except:
+                    print("Couldn't connect")
 
 
 if __name__ == "__main__":
-	thismeter = meter(POLLING_PERIOD)
-	thismeter.run()
+    thismeter = meter(POLLING_PERIOD)
+    thismeter.run()

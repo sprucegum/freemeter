@@ -1,0 +1,4 @@
+port: '/dev/ttyUSB0'
+pins:
+  10: CPU
+  11: RAM
