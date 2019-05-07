@@ -13,7 +13,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
-import psutil, serial, time, random
+import psutil, serial, time, random, yaml
 
 POLLING_HZ = 20
 POLLING_PERIOD = 1.0 / POLLING_HZ
@@ -27,13 +27,15 @@ class meter:
 
     def __init__(self, interval):
         print("initializing")
+        with open('meter_config.yaml') as c:
+            self.config = yaml.load(c.read())
         self.serialConnect()
         self.interval = interval
         self.maxDiskDelta = 1.0
         self.lastDisk = psutil.disk_io_counters().write_count + psutil.disk_io_counters().read_count
 
     def serialConnect(self):
-        self.ser = serial.Serial('COM3')
+        self.ser = serial.Serial(self.config['port'])
 
     # Limit values between 0 and 255
     def clamp(self, x):
