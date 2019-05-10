@@ -23,18 +23,32 @@ Install pyserial and psutil on your Linux, Windows, or Mac desktop. It would pro
 
 Open up **meter_config.yaml** in your favorite editor and modify it to suit your OS and meter setup.
 
-##### Linux, 1 meter connected on pin 10
+##### Linux, 1 controller, 1 meter connected on pin 10
 
-    port: '/dev/ttyUSB0'
-    pins:
-      10: CPU
+    meter1:
+        port: '/dev/ttyUSB0'
+        pins:
+          10: CPU
 
-##### Windows, 2 meters connected on pins 10 and 11
+##### Linux, 2 controllers, 3 meters
 
-    port: 'COM3'
-    pins:
-      10: CPU
-      11: RAM
+    meter1:
+      port: /dev/ttyUSB0
+      pins:
+        10: CPU
+        11: psutil.sensors_temperatures()['k10temp'][0].current/70 # CPU Temp (70 degrees max)
+    meter2:
+      port: /dev/ttyUSB1
+      pins:
+        11: RAM
+
+##### Windows, 1 controller, 2 meters connected on pins 10 and 11
+
+    meter1:
+        port: 'COM3'
+        pins:
+          10: CPU
+          11: RAM
 
 ##### Mac
 
@@ -46,10 +60,11 @@ Using psutil, metrics like CPU Fan Speed and Temperature can be accessed but onl
 
 In this example, I'm reading CPU Fan speed and CPU Temperature on my ancient ASUS M5A97 motherboard. The Python code simply runs an eval() on whatever string you run here. 
 
-    port: /dev/ttyUSB0
-    pins:
-      10: psutil.sensors_fans()['it8721'][0].current/2000.0 # CPU Fan (2000 rpm max)
-      11: psutil.sensors_temperatures()['k10temp'][0].current/70 # CPU Temp (70 degrees max)
+    meter:
+        port: /dev/ttyUSB0
+        pins:
+          10: psutil.sensors_fans()['it8721'][0].current/2000.0 # CPU Fan (2000 rpm max)
+          11: psutil.sensors_temperatures()['k10temp'][0].current/70 # CPU Temp (70 degrees max)
 
 ### Running the host driver
 
