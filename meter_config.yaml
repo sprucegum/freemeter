@@ -1,4 +1,4 @@
-port: '/dev/ttyUSB0'
+port: /dev/ttyUSB0
 pins:
   10: CPU
-  11: RAM
+  11: psutil.sensors_temperatures()['k10temp'][0].current/70 # CPU Temp (70 degrees max)

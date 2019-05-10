@@ -70,18 +70,28 @@ class Metrics:
     def getCpu(self):
         loads = [(i / 100.) for i in psutil.cpu_percent(self.parent.interval, True)]
         usage = random.choice(loads)
-        return self.clamp(int((usage) * 255))
+        return self.percentTo8bit(usage)
 
     def getMem(self):
         vm = psutil.virtual_memory()
-        return self.clamp(int((vm.percent / 100.0) * 255))
+        return self.percentTo8bit(vm.percent / 100.0)
+
+    # Accepts a value from 0 to 1, returns a char (0-255)
+    def percentTo8bit(self, percent):
+        return self.clamp(int(percent * 255))
+
+    def getExec(self, stat):
+        percent = eval(stat)
+        return self.percentTo8bit(percent)
 
     def getMetric(self, stat):
         if stat == "CPU":
             return self.getCpu()
         if stat == "RAM":
             return self.getMem()
-        else:
+        try:
+            return self.getExec(stat)
+        except Exception as e:
             return -1  # no stat found with this name
 
 if __name__ == "__main__":

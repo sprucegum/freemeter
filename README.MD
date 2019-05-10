@@ -40,6 +40,17 @@ Open up **meter_config.yaml** in your favorite editor and modify it to suit your
 
 I haven't tried it on a Mac but I think you can just use **/dev/tty.usbserial0** as the port and use brew to install python and pip.
 
+### Custom Metrics
+
+Using psutil, metrics like CPU Fan Speed and Temperature can be accessed but only through hardware/platform specific data structures.
+
+In this example, I'm reading CPU Fan speed and CPU Temperature on my ancient ASUS M5A97 motherboard. The Python code simply runs an eval() on whatever string you run here. 
+
+    port: /dev/ttyUSB0
+    pins:
+      10: psutil.sensors_fans()['it8721'][0].current/2000.0 # CPU Fan (2000 rpm max)
+      11: psutil.sensors_temperatures()['k10temp'][0].current/70 # CPU Temp (70 degrees max)
+
 ### Running the host driver
 
 Now that you've installed the dependencies and modified the config file, just run the 'meter' script:
