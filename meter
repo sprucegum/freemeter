@@ -18,12 +18,7 @@ import psutil, serial, time, random, yaml
 POLLING_HZ = 20
 POLLING_PERIOD = 1.0 / POLLING_HZ
 
-
-class meter:
-    '''
-            @todo: autodetect the serial port
-            @todo: add a frames per second metric
-    '''
+class Meter:
 
     def __init__(self, interval):
         print("initializing")
@@ -31,42 +26,24 @@ class meter:
             self.config = yaml.load(c.read())
         self.serialConnect()
         self.interval = interval
-        self.maxDiskDelta = 1.0
-        self.lastDisk = psutil.disk_io_counters().write_count + psutil.disk_io_counters().read_count
+        self.metrics = Metrics(self)
 
     def serialConnect(self):
         self.ser = serial.Serial(self.config['port'])
 
-    # Limit values between 0 and 255
-    def clamp(self, x):
-        return min(255, max(0, x))
-
     def writeByte(self, i):
         self.ser.write(int(i).to_bytes(1, 'big'))
-
-    def getCpu(self):
-        loads = [(i / 100.) for i in psutil.cpu_percent(self.interval, True)]
-        usage = random.choice(loads)
-        return self.clamp(int((usage) * 255))
-
-    def getMem(self):
-        vm = psutil.virtual_memory()
-        return self.clamp(int((vm.percent / 100.0) * 255))
 
     def run(self):
         while (True):
             try:
                 self.ser.timeout = 0.1
                 for pin, stat in self.config['pins'].items():
-                    statVal = -1
-                    if stat == 'CPU':
-                        statVal = self.getCpu()
-                    if stat == 'RAM':
-                        statVal = self.getMem()
+                    statVal = self.metrics.getMetric(stat)
                     if statVal >= 0:
                         self.writeByte(pin)
                         self.writeByte(statVal)
-            # two 255 characters signals to the meter that the command is complete.
+                # two 255 characters signals to the meter that the command is complete.
                 self.writeByte(255)
                 self.writeByte(255)
                 time.sleep(self.interval)
@@ -80,6 +57,33 @@ class meter:
                     print("Couldn't connect")
 
 
+class Metrics:
+
+    def __init__(self, parent):
+        self.parent = parent
+        print("metrics module instantiated")
+
+    # Limit values between 0 and 255
+    def clamp(self, x):
+        return min(255, max(0, x))
+
+    def getCpu(self):
+        loads = [(i / 100.) for i in psutil.cpu_percent(self.parent.interval, True)]
+        usage = random.choice(loads)
+        return self.clamp(int((usage) * 255))
+
+    def getMem(self):
+        vm = psutil.virtual_memory()
+        return self.clamp(int((vm.percent / 100.0) * 255))
+
+    def getMetric(self, stat):
+        if stat == "CPU":
+            return self.getCpu()
+        if stat == "RAM":
+            return self.getMem()
+        else:
+            return -1  # no stat found with this name
+
 if __name__ == "__main__":
-    thismeter = meter(POLLING_PERIOD)
+    thismeter = Meter(POLLING_PERIOD)
     thismeter.run()
