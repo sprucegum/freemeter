@@ -24,32 +24,41 @@ class Meter:
         print("initializing")
         with open('meter_config.yaml') as c:
             self.config = yaml.load(c.read())
-        self.serialConnect()
         self.interval = interval
+        self.currentSerial = None
+        self.ser = {}
+        self.serialConnect()
         self.metrics = Metrics(self)
 
     def serialConnect(self):
-        self.ser = serial.Serial(self.config['port'])
+        for meter, config in self.config.items():
+            print(meter, config)
+            try:
+                self.ser[meter] = serial.Serial(config['port'])
+            except Exception as e:
+                self.ser.pop(meter, None)
+
 
     def writeByte(self, i):
-        self.ser.write(int(i).to_bytes(1, 'big'))
+        self.ser[self.currentSerial].write(int(i).to_bytes(1, 'big'))
 
     def run(self):
         while (True):
             try:
-                self.ser.timeout = 0.1
-                for pin, stat in self.config['pins'].items():
-                    statVal = self.metrics.getMetric(stat)
-                    if statVal >= 0:
-                        self.writeByte(pin)
-                        self.writeByte(statVal)
-                # two 255 characters signals to the meter that the command is complete.
-                self.writeByte(255)
-                self.writeByte(255)
-                time.sleep(self.interval)
+                for meter, config in self.config.items():
+                    self.currentSerial = meter
+                    for pin, stat in config['pins'].items():
+                        statVal = self.metrics.getMetric(stat)
+                        if statVal >= 0:
+                            self.writeByte(pin)
+                            self.writeByte(statVal)
+                    # two 255 characters signals to the meter that the command is complete.
+                    self.writeByte(255)
+                    self.writeByte(255)
+                    time.sleep(self.interval)
             except Exception as e:
                 print(e)
-                self.ser.close()
+                self.ser[self.currentSerial].close()
                 time.sleep(5)
                 try:
                     self.serialConnect()
