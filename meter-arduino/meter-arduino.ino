@@ -20,7 +20,7 @@
 #define PINS 12
 #define ONE_SECOND  1000000
 #define SLEEP_DELAY 2000000
-#define ATTACK      125000
+#define ATTACK      250000
 #define RELEASE     2000000
 int VALID_OUTPUTS[] = {0, 0, 0, 1, 0, 1, 1, 0, 0, 1, 1, 1}; // Pins 3, 5, 6, 9, 10 , and 11 allow PWM output.
 int pinState[PINS]; // when first writing to a pin, we set it to OUTPUT

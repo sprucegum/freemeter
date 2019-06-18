@@ -81,6 +81,11 @@ class Metrics:
         usage = random.choice(loads)
         return self.percentTo8bit(usage)
 
+    def avg(self, array):
+        l = len(array)
+        s = sum(array)
+        return float(s/l)
+
     def getMem(self):
         vm = psutil.virtual_memory()
         return self.percentTo8bit(vm.percent / 100.0)
