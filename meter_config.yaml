@@ -6,4 +6,4 @@ meter1:
 meter2:
   port: /dev/ttyUSB1
   pins:
-    11: self.avg([(i / 100.) for i in psutil.cpu_percent(self.parent.interval, True)]) # average CPU (Instead of random sampling of cores)
+    11: CPU # average CPU (Instead of random sampling of cores)
