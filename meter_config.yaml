@@ -1,9 +1,5 @@
 meter1:
   port: /dev/ttyUSB0
   pins:
-    10: psutil.sensors_fans()['it8721'][0].current/2000.0 # CPU Fan (2000 rpm max)
-    11: psutil.sensors_temperatures()['k10temp'][0].current/70 # CPU Temp (70 degrees max)
-meter2:
-  port: /dev/ttyUSB1
-  pins:
-    11: CPU # average CPU (Instead of random sampling of cores)
+    11: RAM
+    10: CPU
