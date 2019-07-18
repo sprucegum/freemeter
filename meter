@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-'''
+"""
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
@@ -12,11 +12,16 @@
 
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-'''
-import psutil, serial, time, random, yaml
+"""
+import psutil
+import serial
+import time
+import random
+import yaml
 
 POLLING_HZ = 20
 POLLING_PERIOD = 1.0 / POLLING_HZ
+
 
 class Meter:
 
@@ -27,41 +32,41 @@ class Meter:
         self.interval = interval
         self.currentSerial = None
         self.ser = {}
-        self.serialConnect()
+        self.serial_connect()
         self.metrics = Metrics(self)
 
-    def serialConnect(self):
+    def serial_connect(self):
         for meter, config in self.config.items():
             print(meter, config)
             try:
                 self.ser[meter] = serial.Serial(config['port'])
             except Exception as e:
+                print("Could not establish connection to meter: {}".format(meter))
                 self.ser.pop(meter, None)
 
-
-    def writeByte(self, i):
+    def write_byte(self, i):
         self.ser[self.currentSerial].write(int(i).to_bytes(1, 'big'))
 
     def run(self):
-        while (True):
+        while True:
             try:
                 for meter, config in self.config.items():
                     self.currentSerial = meter
                     for pin, stat in config['pins'].items():
-                        statVal = self.metrics.getMetric(stat)
-                        if statVal >= 0:
-                            self.writeByte(pin)
-                            self.writeByte(statVal)
+                        stat_val = self.metrics.get_metric(stat)
+                        if stat_val >= 0:
+                            self.write_byte(pin)
+                            self.write_byte(stat_val)
                     # two 255 characters signals to the meter that the command is complete.
-                    self.writeByte(255)
-                    self.writeByte(255)
+                    self.write_byte(255)
+                    self.write_byte(255)
                     time.sleep(self.interval)
             except Exception as e:
                 print(e)
                 self.ser[self.currentSerial].close()
                 time.sleep(5)
                 try:
-                    self.serialConnect()
+                    self.serial_connect()
                 except:
                     print("Couldn't connect")
 
@@ -76,48 +81,49 @@ class Metrics:
     def clamp(self, x):
         return min(255, max(0, x))
 
-    def getCpu(self):
+    def get_cpu(self):
         loads = [(i / 100.) for i in psutil.cpu_percent(self.parent.interval, True)]
         usage = random.choice(loads)
-        return self.percentTo8bit(usage)
+        return self.percent_to_8bit(usage)
 
     def avg(self, array):
         l = len(array)
         s = sum(array)
         return float(s/l)
 
-    def getMem(self):
+    def get_mem(self):
         vm = psutil.virtual_memory()
-        return self.percentTo8bit(vm.percent / 100.0)
+        return self.percent_to_8bit(vm.percent / 100.0)
 
     # Written for a very specific time where I was tethering an wanted a visualization
-    def getNet(self, interface, limit):
+    def get_net(self, interface, limit):
         recv = psutil.net_io_counters(pernic=True)[interface].bytes_recv
         sentc = psutil.net_io_counters(pernic=True)[interface].bytes_sent
         byte_sum = recv + sentc
-        return self.percentTo8bit(1-(byte_sum/(limit*1024*1024)))
-    
+        return self.percent_to_8bit(1 - (byte_sum / (limit * 1024 * 1024)))
 
     # Accepts a value from 0 to 1, returns a char (0-255)
-    def percentTo8bit(self, percent):
+    def percent_to_8bit(self, percent):
         return self.clamp(int(percent * 255))
 
-    def getExec(self, stat):
+    def get_exec(self, stat):
         percent = eval(stat)
-        return self.percentTo8bit(percent)
+        return self.percent_to_8bit(percent)
 
-    def getMetric(self, stat):
+    def get_metric(self, stat):
         if stat == "CPU":
-            return self.getCpu()
+            return self.get_cpu()
         if stat == "RAM":
-            return self.getMem()
+            return self.get_mem()
         if stat == "NET":
-            return self.getNet("enp5s0u2u4u2", 1024)
+            # This value is hardcoded and should be config driven instead.
+            return self.get_net("enp5s0u2u4u2", 1024)
         try:
-            return self.getExec(stat)
+            return self.get_exec(stat)
         except Exception as e:
             return -1  # no stat found with this name
 
+
 if __name__ == "__main__":
-    meter = Meter(POLLING_PERIOD)
-    meter.run()
+    meter_instance = Meter(POLLING_PERIOD)
+    meter_instance.run()
