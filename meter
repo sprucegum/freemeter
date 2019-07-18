@@ -90,6 +90,14 @@ class Metrics:
         vm = psutil.virtual_memory()
         return self.percentTo8bit(vm.percent / 100.0)
 
+    # Written for a very specific time where I was tethering an wanted a visualization
+    def getNet(self, interface, limit):
+        recv = psutil.net_io_counters(pernic=True)[interface].bytes_recv
+        sentc = psutil.net_io_counters(pernic=True)[interface].bytes_sent
+        byte_sum = recv + sentc
+        return self.percentTo8bit(1-(byte_sum/(limit*1024*1024)))
+    
+
     # Accepts a value from 0 to 1, returns a char (0-255)
     def percentTo8bit(self, percent):
         return self.clamp(int(percent * 255))
@@ -103,11 +111,13 @@ class Metrics:
             return self.getCpu()
         if stat == "RAM":
             return self.getMem()
+        if stat == "NET":
+            return self.getNet("enp5s0u2u4u2", 1024)
         try:
             return self.getExec(stat)
         except Exception as e:
             return -1  # no stat found with this name
 
 if __name__ == "__main__":
-    thismeter = Meter(POLLING_PERIOD)
-    thismeter.run()
+    meter = Meter(POLLING_PERIOD)
+    meter.run()
