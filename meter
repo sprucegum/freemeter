@@ -19,7 +19,7 @@ import time
 import random
 import yaml
 
-POLLING_HZ = 20
+POLLING_HZ = 16
 POLLING_PERIOD = 1.0 / POLLING_HZ
 
 
